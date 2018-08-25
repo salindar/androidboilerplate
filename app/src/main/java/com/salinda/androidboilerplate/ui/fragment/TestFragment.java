@@ -29,13 +29,6 @@ public class TestFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.fr_swipe_refresh);
-        Button button = (Button) view.findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                handleViewRefresh(false);
-            }
-        });
     }
 
     @Override

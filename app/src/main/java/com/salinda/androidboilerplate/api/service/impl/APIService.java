@@ -10,7 +10,9 @@ import com.squareup.otto.Subscribe;
 /**
  * Created by Salinda
  */
+//TODO add class level javadoc
 public class APIService {
+    //TODO use dagger 2 injection
     @Inject
     private Bus bus;
 

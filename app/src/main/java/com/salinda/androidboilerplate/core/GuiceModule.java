@@ -1,4 +1,4 @@
-package com.salinda.androidboilerplate.model;
+package com.salinda.androidboilerplate.core;
 
 import android.content.Context;
 

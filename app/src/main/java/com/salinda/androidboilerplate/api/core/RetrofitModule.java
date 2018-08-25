@@ -6,34 +6,42 @@ import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
-import retrofit.RestAdapter;
-import retrofit.converter.GsonConverter;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Salinda
  */
+//TODO add class level javadoc
 public class RetrofitModule<T> {
-
+    //TODO use dagger 2 injection
     @Inject
     @Named("api_base_url")
     private String apiUrl;
+    //TODO use dagger 2 injection
     @Inject
     private RequestInterceptor requestInterceptor;
 
     public T getRestAdapter(Class<T> t, Gson gson, Bundle bundle) {
-        RestAdapter.Builder builder = new RestAdapter.Builder();
-        builder.setEndpoint(apiUrl);
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl(apiUrl);
         if (gson != null) {
-            GsonConverter converter = new GsonConverter(gson);
-            builder.setConverter(converter);
+            builder.addConverterFactory(GsonConverterFactory.create(gson));
         }
-        builder.setLogLevel(RestAdapter.LogLevel.FULL);
+
+        /*
+        Bundle available means there are some headers to be added to the request.
+        This is only possible with adding interceptor to the OkHttpClient and add that
+        OkHttpClient object to the Retrofit.Builder
+         */
         if (bundle != null) {
             requestInterceptor.setBundle(bundle);
-            builder.setRequestInterceptor(requestInterceptor);
+            //OK HTTP
+            OkHttpClient okHttpClient = new OkHttpClient().newBuilder().addInterceptor(requestInterceptor).build();
+            builder.client(okHttpClient);
         }
-        RestAdapter restAdapter = builder.build();
-        return restAdapter.create(t);
+        Retrofit retrofit = builder.build();
+        return retrofit.create(t);
     }
 
 }

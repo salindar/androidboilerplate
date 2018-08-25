@@ -1,23 +1,24 @@
 package com.salinda.androidboilerplate.model;
 
-import retrofit.RetrofitError;
-
+import retrofit2.Response;
 /**
  * Created by Salinda
  */
+//TODO Evaluate whether this class need to be kept as Retrofit2 does not
+    // have RetrofitError class anymore
 public class RetrofitErrorWrapper extends BaseModel {
-    private RetrofitError retrofitError;
+    private Response retrofitError;
     private Integer requestCode;
 
     public RetrofitErrorWrapper() {
         super();
     }
 
-    public RetrofitError getRetrofitError() {
+    public Response getRetrofitError() {
         return retrofitError;
     }
 
-    public void setRetrofitError(RetrofitError retrofitError) {
+    public void setRetrofitError(Response retrofitError) {
         this.retrofitError = retrofitError;
     }
 

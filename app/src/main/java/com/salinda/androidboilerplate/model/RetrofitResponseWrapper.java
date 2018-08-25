@@ -2,7 +2,7 @@ package com.salinda.androidboilerplate.model;
 
 import android.os.Parcel;
 
-import retrofit.client.Response;
+import retrofit2.Response;
 
 /**
  * Created by Salinda.
@@ -10,7 +10,6 @@ import retrofit.client.Response;
 public class RetrofitResponseWrapper<T> extends BaseModel {
     private Response response;
     private Integer requestCode;
-    private T data;
 
 
     public RetrofitResponseWrapper(Parcel in, Response response, Integer requestCode) {
@@ -19,19 +18,9 @@ public class RetrofitResponseWrapper<T> extends BaseModel {
         this.requestCode = requestCode;
     }
 
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    public RetrofitResponseWrapper(Response response, Integer requestCode, T data) {
+    public RetrofitResponseWrapper(Response response, Integer requestCode) {
         this.response = response;
         this.requestCode = requestCode;
-        this.data=data;
-
     }
 
     public Response getRetrofitResponse() {

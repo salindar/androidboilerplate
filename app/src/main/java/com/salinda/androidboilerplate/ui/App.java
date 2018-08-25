@@ -2,7 +2,7 @@ package com.salinda.androidboilerplate.ui;
 
 import android.app.Application;
 
-import com.salinda.androidboilerplate.model.GuiceModule;
+import com.salinda.androidboilerplate.core.GuiceModule;
 import com.google.inject.Inject;
 import com.google.inject.util.Modules;
 import com.salinda.androidboilerplate.api.service.impl.APIService;
