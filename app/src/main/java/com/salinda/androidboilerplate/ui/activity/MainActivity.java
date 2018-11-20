@@ -5,15 +5,22 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.salinda.androidboilerplate.R;
+import com.salinda.androidboilerplate.core.Person;
+import com.salinda.androidboilerplate.ui.App;
 import com.salinda.androidboilerplate.ui.fragment.TestFragment;
 
-public class MainActivity extends BaseActivity {
+import javax.inject.Inject;
 
+public class MainActivity extends BaseActivity {
+    @Inject
+    Person person;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("TAG","MSG");
         setContentView(R.layout.activity_main);
+        //DAGGER This is must to inject required components to the desired component
+        App.getMyComponent().inject(this);
         addFragment(R.id.main_view_content,new TestFragment(),false);
     }
 

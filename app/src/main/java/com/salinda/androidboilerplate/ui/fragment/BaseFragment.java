@@ -10,22 +10,28 @@ import android.widget.Toast;
 
 import com.salinda.androidboilerplate.R;
 import com.salinda.androidboilerplate.model.RetrofitErrorWrapper;
+import com.salinda.androidboilerplate.ui.App;
 import com.salinda.androidboilerplate.ui.FragmentInteraction;
 import com.salinda.androidboilerplate.ui.activity.BaseActivity;
 
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import org.greenrobot.eventbus.EventBus;
+
+import javax.inject.Inject;
+
 
 /**
  * Created by Salinda
  */
-public abstract class BaseFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public abstract class BaseFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,EventBusHandler {
     protected FragmentInteraction callBack;
     private android.app.ActionBar actionBar;
+    @Inject
+    protected EventBus bus;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        App.getMyComponent().inject(this);
         actionBar = ((BaseActivity) getActivity()).getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -35,7 +41,8 @@ public abstract class BaseFragment extends Fragment implements SwipeRefreshLayou
     @Override
     public void onResume() {
         super.onResume();
-       // bus.register(this);
+        bus.register(this);
+        registerComponents();
         if (actionBar != null) {
             actionBar.setTitle(getActivityTitle());
         }
@@ -46,7 +53,8 @@ public abstract class BaseFragment extends Fragment implements SwipeRefreshLayou
     @Override
     public void onPause() {
         super.onPause();
-       // bus.unregister(this);
+        bus.unregister(this);
+        unRegisterComponents();
     }
 
     @Override
@@ -127,42 +135,42 @@ public abstract class BaseFragment extends Fragment implements SwipeRefreshLayou
     }
 
     protected void handleRetrofitError(RetrofitErrorWrapper retrofitErrorWrapper) {
-        RetrofitError retrofitError = retrofitErrorWrapper.getRetrofitError();
-        String errorMessage = null;
-        switch (retrofitError.getKind()) {
-            case NETWORK:
-                errorMessage = "It seems network unreachable.";
-                break;
-            case UNEXPECTED:
-
-                break;
-            case HTTP:
-                Response response = retrofitError.getResponse();
-                switch (response.getStatus()) {
-                    case 400:
-
-                        break;
-                    case 403:
-
-                        break;
-                    case 404:
-
-                        break;
-                    default:
-
-                }
-                break;
-            default:
-                break;
-        }
-        if (retrofitError != null) {
-            if (errorMessage == null) {
-                errorMessage = retrofitError.getMessage();
-            }
-        }
-        if (errorMessage != null) {
-            showErrorMessage(errorMessage);
-        }
-        handleViewRefresh(false);
+//        RetrofitError retrofitError = retrofitErrorWrapper.getRetrofitError();
+//        String errorMessage = null;
+//        switch (retrofitError.getKind()) {
+//            case NETWORK:
+//                errorMessage = "It seems network unreachable.";
+//                break;
+//            case UNEXPECTED:
+//
+//                break;
+//            case HTTP:
+//                Response response = retrofitError.getResponse();
+//                switch (response.getStatus()) {
+//                    case 400:
+//
+//                        break;
+//                    case 403:
+//
+//                        break;
+//                    case 404:
+//
+//                        break;
+//                    default:
+//
+//                }
+//                break;
+//            default:
+//                break;
+//        }
+//        if (retrofitError != null) {
+//            if (errorMessage == null) {
+//                errorMessage = retrofitError.getMessage();
+//            }
+//        }
+//        if (errorMessage != null) {
+//            showErrorMessage(errorMessage);
+//        }
+//        handleViewRefresh(false);
     }
 }

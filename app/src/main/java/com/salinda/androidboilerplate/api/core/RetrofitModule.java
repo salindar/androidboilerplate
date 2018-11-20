@@ -3,8 +3,8 @@ package com.salinda.androidboilerplate.api.core;
 import android.os.Bundle;
 
 import com.google.gson.Gson;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
+
+import javax.inject.Inject;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -16,18 +16,25 @@ import retrofit2.converter.gson.GsonConverterFactory;
 //TODO add class level javadoc
 public class RetrofitModule<T> {
     //TODO use dagger 2 injection
-    @Inject
-    @Named("api_base_url")
-    private String apiUrl;
+//    @Inject
+//    @Named("api_base_url")
+    private String apiUrl="https://jsonplaceholder.typicode.com";
     //TODO use dagger 2 injection
-    @Inject
+   // @Inject
+
+    public RetrofitModule(){
+
+    }
     private RequestInterceptor requestInterceptor;
 
-    public T getRestAdapter(Class<T> t, Gson gson, Bundle bundle) {
-        Retrofit.Builder builder = new Retrofit.Builder().baseUrl(apiUrl);
-        if (gson != null) {
-            builder.addConverterFactory(GsonConverterFactory.create(gson));
+    public T getRestClient(Class<T> t, Gson gson, Bundle bundle) {
+        if(apiUrl==null){
+            throw new NullPointerException("apiUrl is not defined, use dagger to properly inject apiUrl to RetrofitModule class");
         }
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl(apiUrl);
+       // if (gson != null) {
+            builder.addConverterFactory(GsonConverterFactory.create());
+       // }
 
         /*
         Bundle available means there are some headers to be added to the request.

@@ -1,11 +1,19 @@
 package com.salinda.androidboilerplate.api.service.impl;
 
+import com.salinda.androidboilerplate.api.core.APIResponseCallBack;
 import com.salinda.androidboilerplate.api.core.RetrofitModule;
 import com.salinda.androidboilerplate.api.service.abstractservice.API;
 import com.salinda.androidboilerplate.api.service.event.SampleEvent;
-import com.google.inject.Inject;
-import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
+import com.salinda.androidboilerplate.model.SampleModel;
+import com.salinda.androidboilerplate.ui.App;
+
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import javax.inject.Inject;
+
+import retrofit2.Call;
 
 /**
  * Created by Salinda
@@ -14,14 +22,31 @@ import com.squareup.otto.Subscribe;
 public class APIService {
     //TODO use dagger 2 injection
     @Inject
-    private Bus bus;
+    EventBus bus;
+    @Inject
+    APIResponseCallBack<SampleModel> sampleModelAPIResponseCallBack;
 
     @Inject
-    private RetrofitModule<API> retrofitModule;
+    RetrofitModule<API> retrofitModule;
 
+    public APIService(){
+        App.getMyComponent().inject(this);
+    }
 
     @Subscribe
     public void getUser(SampleEvent event) {
+        API api = retrofitModule.getRestClient(API.class, null, null);
+        Call<SampleModel> call=api.getUser();
+        sampleModelAPIResponseCallBack.setBus(bus);
+        call.enqueue(sampleModelAPIResponseCallBack);
 
+    }
+
+    public  void unregister(){
+        bus.unregister(this);
+    }
+
+    public  void register(){
+        bus.register(this);
     }
 }

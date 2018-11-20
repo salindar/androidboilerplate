@@ -2,7 +2,6 @@ package com.salinda.androidboilerplate.ui.validation;
 
 
 import com.salinda.androidboilerplate.ui.validation.validator.BaseValidator;
-import com.google.inject.Inject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.List;
 public class ValidationHandler {
     private List<BaseValidator> validatorList;
 
-    @Inject
+    //@Inject
     public ValidationHandler() {
         if (validatorList == null) {
             validatorList = new ArrayList<>();

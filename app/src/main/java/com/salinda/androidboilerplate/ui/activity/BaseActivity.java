@@ -10,13 +10,11 @@ import android.text.TextUtils;
 import com.salinda.androidboilerplate.ui.App;
 import com.salinda.androidboilerplate.ui.FragmentInteraction;
 import com.salinda.androidboilerplate.ui.fragment.BaseFragment;
-import com.squareup.otto.Bus;
 
 
 
 public abstract class BaseActivity extends AppCompatActivity implements FragmentInteraction {
     protected CharSequence mTitle;
-    protected Bus bus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +26,11 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
     protected void onResume() {
         super.onResume();
         getApplicationContext();
-        bus=((App)this.getApplication()).getBusObject();
-        bus.register(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        bus.unregister(this);
     }
 
     public void setTitle(CharSequence mTitle) {

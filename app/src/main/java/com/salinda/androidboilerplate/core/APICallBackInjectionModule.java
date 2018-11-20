@@ -1,14 +1,9 @@
 package com.salinda.androidboilerplate.core;
 
+import com.salinda.androidboilerplate.api.core.APIResponseCallBack;
 import com.salinda.androidboilerplate.api.core.RetrofitModule;
 import com.salinda.androidboilerplate.api.service.abstractservice.API;
-import com.salinda.androidboilerplate.api.service.impl.APIService;
-
-import org.greenrobot.eventbus.EventBus;
-
-import java.util.Random;
-
-import javax.inject.Singleton;
+import com.salinda.androidboilerplate.model.SampleModel;
 
 import dagger.Module;
 import dagger.Provides;
@@ -18,25 +13,13 @@ import dagger.Provides;
  * Email: salindakrishantha@gmail.com
  */
 @Module
-public class RandomInjectionModule {
+public class APICallBackInjectionModule {
 
-    public RandomInjectionModule() {
+    public APICallBackInjectionModule() {
     }
 
     @Provides
-    static RetrofitModule<API>  provideApiModule (){
-        return new RetrofitModule<>();
-    }
-
-    @Provides
-    @Singleton
-    static APIService provideApiService(){
-        return new APIService();
-    }
-
-    @Provides
-    @Singleton
-    static EventBus getEventBus(){
-        return EventBus.getDefault();
+    static APIResponseCallBack<SampleModel> provideSampleModelAPIResponseCallBack (){
+        return new APIResponseCallBack<>();
     }
 }

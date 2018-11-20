@@ -2,8 +2,9 @@ package com.salinda.androidboilerplate.api.core;
 
 import com.salinda.androidboilerplate.model.RetrofitErrorWrapper;
 import com.salinda.androidboilerplate.model.RetrofitResponseWrapper;
-import com.google.inject.Inject;
-import com.squareup.otto.Bus;
+import com.salinda.androidboilerplate.ui.App;
+
+import org.greenrobot.eventbus.EventBus;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,10 +15,19 @@ import retrofit2.Response;
  */
 //TODO add class level javadoc
 public class APIResponseCallBack<T> implements Callback<T> {
+    public EventBus getBus() {
+        return bus;
+    }
+
+    public void setBus(EventBus bus) {
+        this.bus = bus;
+    }
+
     //TODO use dagger 2 injection
-    @Inject
-    private Bus bus;
+    //Try to inject this using dagger
+    private EventBus bus;
     private int requestCode = 0;
+
 
     public int getRequestCode() {
         return requestCode;
@@ -40,6 +50,6 @@ public class APIResponseCallBack<T> implements Callback<T> {
 
     @Override
     public void onFailure(Call<T> call, Throwable t) {
-
+int x=0;
     }
 }
