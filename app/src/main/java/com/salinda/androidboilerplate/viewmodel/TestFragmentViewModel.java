@@ -32,16 +32,8 @@ import retrofit2.Retrofit;
  */
 public class TestFragmentViewModel extends ViewModel {
     @Inject
-    Person person;
-
-//    @Inject
-//    APIService apiService;
-
-    @Inject
     EventBus bus;
 
-    @Inject
-    RetrofitModule<API> retrofitModule;
     //Need to mention every inject class in MyComponent
     TestFragmentViewModel(){
         App.getMyComponent().inject(this);

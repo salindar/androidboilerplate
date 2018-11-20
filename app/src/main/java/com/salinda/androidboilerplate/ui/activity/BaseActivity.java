@@ -40,20 +40,28 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
     }
 
     protected void replaceFragment(int container, BaseFragment fragment) {
-    /*update the main content by replacing fragments*/
+        /*update the main content by replacing fragments*/
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(container, fragment);
         fragmentTransaction.commit();
     }
 
-    protected void addFragment(int container, BaseFragment fragment, boolean addToBackStack) {
-    /*update the main content by replacing fragments*/
+    protected void addFragment(int container, Class clasz, boolean addToBackStack) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        /*update the main content by replacing fragments*/
+        BaseFragment baseFragment;
+        //In order to handle https://stackoverflow.com/questions/13305861/fool-proof-way-to-handle-fragment-on-orientation-change/13306633#13306633
+        baseFragment = (BaseFragment) getSupportFragmentManager().findFragmentByTag(clasz.toString());
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         //Use replace instead of add as to fix the but which shows the previous fragment underneath.
         //http://stackoverflow.com/questions/6228401/adding-a-fragment-with-add-method-doesnt-hide-previous-fragments
-        fragmentTransaction.replace(container, fragment, "");
+        if (baseFragment == null) {
+            baseFragment = (BaseFragment) clasz.newInstance();
+        }
+        fragmentTransaction.replace(container, baseFragment, clasz.toString());
+
         if (addToBackStack) {
             fragmentTransaction.addToBackStack("");
         }

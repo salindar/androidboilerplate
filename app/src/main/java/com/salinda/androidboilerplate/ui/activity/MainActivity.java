@@ -14,14 +14,25 @@ import javax.inject.Inject;
 public class MainActivity extends BaseActivity {
     @Inject
     Person person;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("TAG","MSG");
+        Log.d("TAG", "MSG");
         setContentView(R.layout.activity_main);
         //DAGGER This is must to inject required components to the desired component
         App.getMyComponent().inject(this);
-        addFragment(R.id.main_view_content,new TestFragment(),false);
+
+        try {
+            addFragment(R.id.main_view_content, TestFragment.class, false);
+        } catch (ClassNotFoundException e) {
+
+        } catch (InstantiationException e) {
+
+        } catch (IllegalAccessException e) {
+
+        }
+
     }
 
     @Override

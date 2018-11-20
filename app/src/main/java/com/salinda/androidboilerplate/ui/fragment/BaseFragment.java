@@ -134,6 +134,14 @@ public abstract class BaseFragment extends Fragment implements SwipeRefreshLayou
         }
     }
 
+    /**
+     * Fragment tag is necessary to add fragments to fragment manager otherwise it will cause issues
+     * in configuration change. Please provide an unique fragment tag in the implementation fragment.
+     * Please refer to the TestFragment class implementation for further details.
+     * @return
+     */
+    public abstract String getFragmentTag();
+
     protected void handleRetrofitError(RetrofitErrorWrapper retrofitErrorWrapper) {
 //        RetrofitError retrofitError = retrofitErrorWrapper.getRetrofitError();
 //        String errorMessage = null;

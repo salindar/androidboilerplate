@@ -39,7 +39,7 @@ public class TestFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_test, container, false);
+        View view = inflater.inflate(R.layout.fragment_test, container, false);
         return view;
     }
 
@@ -54,8 +54,8 @@ public class TestFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.fr_swipe_refresh);
-        button=(Button) view.findViewById(R.id.button);
-        test=(TextView) view.findViewById(R.id.test);
+        button = (Button) view.findViewById(R.id.button);
+        test = (TextView) view.findViewById(R.id.test);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +63,7 @@ public class TestFragment extends BaseFragment {
             }
         });
     }
+
     private final Observer<SampleModel> observer = new Observer<SampleModel>() {
         @Override
         public void onChanged(@Nullable SampleModel sampleModel) {
@@ -75,13 +76,10 @@ public class TestFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-         model = ViewModelProviders.of(this).get(TestFragmentViewModel.class);
+        model = ViewModelProviders.of(this).get(TestFragmentViewModel.class);
+        model.getComments().observe(this, observer);
 
-//        model.getComments().observe(this, comments -> {
-//            test.setText(comments.getTitle());
-//        });
-        model.getComments().observe(this,observer);
-        if(model.getSampleModel() != null){
+        if (model.getSampleModel() != null) {
             test.setText(model.getSampleModel().getTitle());
         }
     }
@@ -97,6 +95,11 @@ public class TestFragment extends BaseFragment {
     }
 
     @Override
+    public String getFragmentTag() {
+        return TestFragment.class.toString();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
     }
@@ -109,8 +112,8 @@ public class TestFragment extends BaseFragment {
 
     @Subscribe
     public void getUser(SampleEvent event) {
-        int x=0;
-        int y=0;
+        int x = 0;
+        int y = 0;
 
     }
 

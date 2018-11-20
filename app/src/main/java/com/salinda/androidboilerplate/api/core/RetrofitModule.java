@@ -15,12 +15,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 //TODO add class level javadoc
 public class RetrofitModule<T> {
-    //TODO use dagger 2 injection
-//    @Inject
-//    @Named("api_base_url")
+
+    //TODO Inject APIO base url using injection
     private String apiUrl="https://jsonplaceholder.typicode.com";
-    //TODO use dagger 2 injection
-   // @Inject
 
     public RetrofitModule(){
 
