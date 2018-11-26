@@ -1,5 +1,6 @@
 package com.salinda.androidboilerplate.core;
 
+import com.salinda.androidboilerplate.analytics.core.AnalyticManager;
 import com.salinda.androidboilerplate.api.core.RetrofitModule;
 import com.salinda.androidboilerplate.api.service.abstractservice.API;
 import com.salinda.androidboilerplate.api.service.impl.APIService;
@@ -38,5 +39,11 @@ public class RandomInjectionModule {
     @Singleton
     static EventBus getEventBus(){
         return EventBus.getDefault();
+    }
+
+    @Provides
+    @Singleton
+    static AnalyticManager getAnalyticManager(){
+        return new AnalyticManager();
     }
 }

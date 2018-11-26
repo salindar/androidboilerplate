@@ -4,9 +4,8 @@ import android.app.Application;
 
 
 import com.salinda.androidboilerplate.api.service.impl.APIService;
-import com.salinda.androidboilerplate.core.DaggerMyComponent;
-import com.salinda.androidboilerplate.core.RandomInjectionModule;
-import com.salinda.androidboilerplate.core.MyComponent;
+import com.salinda.androidboilerplate.core.DaggerComponents;
+import com.salinda.androidboilerplate.core.DaggerDaggerComponents;
 import com.squareup.otto.Bus;
 
 
@@ -20,15 +19,15 @@ public class App extends Application {
 
    // @Inject
     private APIService APIService;
-    private static MyComponent component;
+    private static DaggerComponents component;
     @Override
     public void onCreate() {
         super.onCreate();
         initializeGuice();
         registerServicesInBus();
-        component = DaggerMyComponent.builder().build();
+        component = DaggerDaggerComponents.builder().build();
     }
-    public static MyComponent getMyComponent() {
+    public static DaggerComponents getMyComponent() {
         return component;
     }
     public Bus getBusObject(){

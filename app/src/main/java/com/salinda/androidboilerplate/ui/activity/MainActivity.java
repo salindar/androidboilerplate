@@ -5,15 +5,12 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.salinda.androidboilerplate.R;
-import com.salinda.androidboilerplate.core.Person;
 import com.salinda.androidboilerplate.ui.App;
 import com.salinda.androidboilerplate.ui.fragment.TestFragment;
 
 import javax.inject.Inject;
 
 public class MainActivity extends BaseActivity {
-    @Inject
-    Person person;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

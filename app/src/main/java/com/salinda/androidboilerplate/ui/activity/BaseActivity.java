@@ -7,11 +7,17 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
+import com.salinda.androidboilerplate.R;
+import com.salinda.androidboilerplate.analytics.core.AnalyticManager;
 import com.salinda.androidboilerplate.ui.App;
 import com.salinda.androidboilerplate.ui.FragmentInteraction;
 import com.salinda.androidboilerplate.ui.fragment.BaseFragment;
+import com.salinda.androidboilerplate.ui.fragment.EventBusHandler;
+import com.squareup.otto.Bus;
 
+import org.greenrobot.eventbus.EventBus;
 
+import javax.inject.Inject;
 
 public abstract class BaseActivity extends AppCompatActivity implements FragmentInteraction {
     protected CharSequence mTitle;
@@ -25,7 +31,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
     @Override
     protected void onResume() {
         super.onResume();
-        getApplicationContext();
     }
 
     @Override

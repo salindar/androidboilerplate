@@ -3,7 +3,7 @@ package com.salinda.androidboilerplate.api.service.impl;
 import com.salinda.androidboilerplate.api.core.APIResponseCallBack;
 import com.salinda.androidboilerplate.api.core.RetrofitModule;
 import com.salinda.androidboilerplate.api.service.abstractservice.API;
-import com.salinda.androidboilerplate.api.service.event.SampleEvent;
+import com.salinda.androidboilerplate.api.service.event.SampleAPIEvent;
 import com.salinda.androidboilerplate.model.SampleModel;
 import com.salinda.androidboilerplate.ui.App;
 
@@ -20,7 +20,6 @@ import retrofit2.Call;
  */
 //TODO add class level javadoc
 public class APIService {
-    //TODO use dagger 2 injection
     @Inject
     EventBus bus;
     @Inject
@@ -34,7 +33,7 @@ public class APIService {
     }
 
     @Subscribe
-    public void getUser(SampleEvent event) {
+    public void getUser(SampleAPIEvent event) {
         API api = retrofitModule.getRestClient(API.class, null, null);
         Call<SampleModel> call=api.getUser();
         sampleModelAPIResponseCallBack.setBus(bus);
