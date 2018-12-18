@@ -1,11 +1,8 @@
 package com.salinda.androidboilerplate.core;
 
 import com.salinda.androidboilerplate.analytics.core.AnalyticManager;
-import com.salinda.androidboilerplate.api.core.APIResponseCallBack;
 import com.salinda.androidboilerplate.api.service.impl.APIService;
-import com.salinda.androidboilerplate.model.SampleModel;
 import com.salinda.androidboilerplate.ui.activity.BaseActivity;
-import com.salinda.androidboilerplate.ui.activity.MainActivity;
 import com.salinda.androidboilerplate.ui.fragment.BaseFragment;
 import com.salinda.androidboilerplate.ui.fragment.TestFragment;
 import com.salinda.androidboilerplate.viewmodel.TestFragmentViewModel;

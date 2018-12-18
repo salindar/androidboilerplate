@@ -105,6 +105,8 @@ public class TestFragment extends BaseFragment {
 
         /**
          * END OF DEPENDENCY INJECTION **/
+
+
     }
 
     @Override
